@@ -1,4 +1,4 @@
-var search = function (from, to, graph) {
+var breadthFirstSearch = function (from, to, graph) {
     var _a;
     if (!from || !to || !graph || !graph.size)
         return new Error("Error!");
@@ -45,14 +45,14 @@ var search = function (from, to, graph) {
     }
     return null;
 };
-var map = new Map();
-map.set("cab", ["cat", "car"]);
-map.set("car", ["cat", "bar"]);
-map.set("bar", ["bat"]);
-map.set("cat", ["mat", "bat"]);
-map.set("mat", ["bat"]);
-map.set("bat", []);
-console.log(search("cab", "bar", map));
+var bMap = new Map();
+bMap.set("cab", ["cat", "car"]);
+bMap.set("car", ["cat", "bar"]);
+bMap.set("bar", ["bat"]);
+bMap.set("cat", ["mat", "bat"]);
+bMap.set("mat", ["bat"]);
+bMap.set("bat", []);
+console.log(breadthFirstSearch("cab", "bar", bMap));
 // type Names2 =
 //   | "you"
 //   | "bob"

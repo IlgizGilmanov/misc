@@ -1,13 +1,17 @@
-type NodeType = {
+type bNodeType = {
   length: number;
   name: string;
   prevNode?: string;
 };
 
-const search = (from: string, to: string, graph: Map<string, string[]>) => {
+const breadthFirstSearch = (
+  from: string,
+  to: string,
+  graph: Map<string, string[]>
+) => {
   if (!from || !to || !graph || !graph.size) return new Error("Error!");
-  const checked: NodeType[] = [{ length: 0, name: from }];
-  const queue: NodeType[] =
+  const checked: bNodeType[] = [{ length: 0, name: from }];
+  const queue: bNodeType[] =
     graph
       .get(from)
       ?.map((item) => ({ length: 1, name: item, prevNode: from })) || [];
@@ -22,7 +26,7 @@ const search = (from: string, to: string, graph: Map<string, string[]>) => {
     checked.push(current);
 
     if (current.name === to) {
-      const route: NodeType[] = [current];
+      const route: bNodeType[] = [current];
       let routeNode = current;
       while (routeNode.prevNode) {
         const prev = checked.find((item) => item.name === routeNode.prevNode);
@@ -52,15 +56,15 @@ const search = (from: string, to: string, graph: Map<string, string[]>) => {
   return null;
 };
 
-type Names1 = "cab" | "cat" | "car" | "bar" | "mat" | "bat" | "tic";
-const map = new Map<Names1, Names1[]>();
-map.set("cab", ["cat", "car"]);
-map.set("car", ["cat", "bar"]);
-map.set("bar", ["bat"]);
-map.set("cat", ["mat", "bat"]);
-map.set("mat", ["bat"]);
-map.set("bat", []);
-console.log(search("cab", "bar", map));
+type bNames1 = "cab" | "cat" | "car" | "bar" | "mat" | "bat" | "tic";
+const bMap = new Map<bNames1, bNames1[]>();
+bMap.set("cab", ["cat", "car"]);
+bMap.set("car", ["cat", "bar"]);
+bMap.set("bar", ["bat"]);
+bMap.set("cat", ["mat", "bat"]);
+bMap.set("mat", ["bat"]);
+bMap.set("bat", []);
+console.log(breadthFirstSearch("cab", "bar", bMap));
 
 // type Names2 =
 //   | "you"
